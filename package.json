@@ -1,0 +1,15 @@
+{
+  "name": "lab2",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "^1.52.0",
+    "@types/node": "^22.15.29",
+    "testit-adapter-playwright": "^3.2.4-TMS-5.3"
+  },
+  "scripts": {},
+  "prettier": {
+    "printWidth": 666
+  }
+}
