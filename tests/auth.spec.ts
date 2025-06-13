@@ -47,4 +47,24 @@ test.describe("Авторизация", () => {
     await homePage.authForm.passwordError.waitFor();
     expect(homePage.authForm.passwordError).toHaveText("Неправильный пароль");
   });
+  
+  test("[ST-1-] Авторизация по электронной почте с не зарегистрированной почтой", async ({ page }) => {
+    const email = "666@ya.ru";
+    const password = "not-a-password";
+
+    await homePage.goto();
+    expect(page).toHaveURL(homePage.url);
+
+    await homePage.loginButton.click();
+    expect(homePage.authForm.root).toBeVisible();
+
+    await homePage.authForm.authByMailButton.click();
+
+    await homePage.authForm.emailInput.fill(email);
+    await homePage.authForm.passwordInput.fill(password);
+    await homePage.authForm.loginButton.click();
+
+    await homePage.authForm.emailError.waitFor();
+    expect(homePage.authForm.emailError).toHaveText("E-mail не зарегистрирован");
+  });
 });
