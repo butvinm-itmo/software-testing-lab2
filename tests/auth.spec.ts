@@ -48,7 +48,7 @@ test.describe("Авторизация", () => {
     await expect(homePage.authForm.passwordError).toHaveText("Неправильный пароль");
   });
   
-  test("[ST-1-] Авторизация по электронной почте с не зарегистрированной почтой", async ({ page }) => {
+  test("[ST-1-] Авторизация по электронной почте с незарегистрированной почтой", async ({ page }) => {
     const email = "666@ya.ru";
     const password = "not-a-password";
 
