@@ -6,7 +6,14 @@ on:
     branches: [ main, master ]
 jobs:
   test:
-    environment: testit
+    env:
+      TMS_PRIVATE_TOKEN: ${{ secrets.TMS_PRIVATE_TOKEN }}
+      TMS_URL: ${{ vars.TMS_URL }}
+      TMS_PROJECT_ID: ${{ vars.TMS_PROJECT_ID }}
+      TMS_CONFIGURATION_ID: ${{ vars.TMS_CONFIGURATION_ID }}
+      TMS_ADAPTER_MODE: ${{ vars.TMS_ADAPTER_MODE }}
+      TMS_AUTOMATIC_CREATION_TEST_CASES: ${{ vars.TMS_AUTOMATIC_CREATION_TEST_CASES }}
+      TMS_AUTOMATIC_UPDATION_LINKS_TO_TEST_CASES: ${{ vars.TMS_AUTOMATIC_UPDATION_LINKS_TO_TEST_CASES }}
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
