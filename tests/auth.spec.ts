@@ -13,10 +13,10 @@ test.describe("Авторизация", () => {
     const password = "1403f3iT1e";
 
     await homePage.goto();
-    expect(page).toHaveURL(homePage.url);
+    await expect(page).toHaveURL(homePage.url);
 
     await homePage.loginButton.click();
-    expect(homePage.authForm.root).toBeVisible();
+    await expect(homePage.authForm.root).toBeVisible();
 
     await homePage.authForm.authByMailButton.click();
 
@@ -25,7 +25,7 @@ test.describe("Авторизация", () => {
     await homePage.authForm.loginButton.click();
 
     await homePage.profileButton.waitFor();
-    expect(homePage.profileButton).toBeVisible();
+    await expect(homePage.profileButton).toBeVisible();
   });
 
   test("[ST-1-] Авторизация по электронной почте с неправильным паролем", async ({ page }) => {
@@ -33,10 +33,10 @@ test.describe("Авторизация", () => {
     const password = "not-a-password";
 
     await homePage.goto();
-    expect(page).toHaveURL(homePage.url);
+    await expect(page).toHaveURL(homePage.url);
 
     await homePage.loginButton.click();
-    expect(homePage.authForm.root).toBeVisible();
+    await expect(homePage.authForm.root).toBeVisible();
 
     await homePage.authForm.authByMailButton.click();
 
@@ -45,7 +45,7 @@ test.describe("Авторизация", () => {
     await homePage.authForm.loginButton.click();
 
     await homePage.authForm.passwordError.waitFor();
-    expect(homePage.authForm.passwordError).toHaveText("Неправильный пароль");
+    await expect(homePage.authForm.passwordError).toHaveText("Неправильный пароль");
   });
   
   test("[ST-1-] Авторизация по электронной почте с не зарегистрированной почтой", async ({ page }) => {
@@ -53,10 +53,10 @@ test.describe("Авторизация", () => {
     const password = "not-a-password";
 
     await homePage.goto();
-    expect(page).toHaveURL(homePage.url);
+    await expect(page).toHaveURL(homePage.url);
 
     await homePage.loginButton.click();
-    expect(homePage.authForm.root).toBeVisible();
+    await expect(homePage.authForm.root).toBeVisible();
 
     await homePage.authForm.authByMailButton.click();
 
@@ -65,6 +65,6 @@ test.describe("Авторизация", () => {
     await homePage.authForm.loginButton.click();
 
     await homePage.authForm.emailError.waitFor();
-    expect(homePage.authForm.emailError).toHaveText("E-mail не зарегистрирован");
+    await expect(homePage.authForm.emailError).toHaveText("E-mail не зарегистрирован");
   });
 });
