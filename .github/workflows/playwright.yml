@@ -14,8 +14,8 @@ jobs:
       TMS_ADAPTER_MODE: ${{ vars.TMS_ADAPTER_MODE }}
       TMS_AUTOMATIC_CREATION_TEST_CASES: ${{ vars.TMS_AUTOMATIC_CREATION_TEST_CASES }}
       TMS_AUTOMATIC_UPDATION_LINKS_TO_TEST_CASES: ${{ vars.TMS_AUTOMATIC_UPDATION_LINKS_TO_TEST_CASES }}
-      MT_VALID_EMAIL: ${{ vars.MT_VALID_EMAIL }}
-      MT_VALID_PASSWORD: ${{ vars.MT_VALID_PASSWORD }}
+      MT_VALID_EMAIL: ${{ secrets.MT_VALID_EMAIL }}
+      MT_VALID_PASSWORD: ${{ secrets.MT_VALID_PASSWORD }}
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
