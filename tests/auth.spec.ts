@@ -29,7 +29,7 @@ test.describe("Авторизация", () => {
     await expect(homePage.profileButton).toBeVisible();
   });
 
-  test("[ST-1-] Авторизация по электронной почте с неправильным паролем", async ({ page }) => {
+  test("[ST-1] Авторизация по электронной почте с неправильным паролем", async ({ page }) => {
     const email = VALID_EMAIL;
     const password = WRONG_PASSWORD;
 
@@ -49,7 +49,7 @@ test.describe("Авторизация", () => {
     await expect(homePage.authForm.passwordError).toHaveText("Неправильный пароль");
   });
 
-  test("[ST-1-] Авторизация по электронной почте с незарегистрированной почтой", async ({ page }) => {
+  test("[ST-1] Авторизация по электронной почте с незарегистрированной почтой", async ({ page }) => {
     const email = WRONG_EMAIL;
     const password = WRONG_PASSWORD;
 
