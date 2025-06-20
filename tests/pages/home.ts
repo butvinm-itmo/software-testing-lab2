@@ -9,6 +9,7 @@ export class HomePage {
   readonly locationButton: Locator;
   readonly authForm: AuthForm;
   readonly locationModal: LocationModal;
+  readonly blogPost: BlogPost;
 
   constructor(page: Page) {
     this.page = page;
@@ -18,6 +19,7 @@ export class HomePage {
     this.locationButton = page.locator(".geo-position");
     this.authForm = new AuthForm(page.locator(".auth-form"));
     this.locationModal = new LocationModal(page, page.locator(".geo-popup"));
+    this.blogPost = new BlogPost(page.getByRole("article").first());
   }
 
   async goto() {
@@ -29,6 +31,27 @@ export class HomePage {
     if (await this.onboardingPopup.isVisible()) {
       await this.onboardingPopup.locator(".popup-close").click();
     }
+  }
+}
+
+export class BlogPost {
+  readonly root: Locator;
+  readonly likeButton: Locator;
+  readonly likesCount: Locator;
+  readonly like: Locator;
+
+  constructor(root: Locator) {
+    this.root = root;
+    this.likeButton = root.locator('[data-test^="control-reaction-"]');
+    this.likesCount = this.likeButton.locator("span:not([class])");
+    this.like = root.locator(".post-actions__btn_love");
+  }
+
+  async getLikesCount(): Promise<number> {
+    if (await this.likesCount.isVisible()) {
+      return parseInt((await this.likesCount.innerText())!);
+    }
+    return 0;
   }
 }
 
