@@ -12,6 +12,11 @@ export class HomePage {
   readonly locationButton: Locator;
   readonly authForm: AuthModal;
   readonly locationModal: LocationModal;
+  readonly searchButton: Locator;
+  readonly searchInput: Locator;
+  readonly searchResultsChannels: Locator;
+  readonly searchResultsPosts: Locator;
+  readonly searchResultsGeo: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -21,6 +26,11 @@ export class HomePage {
     this.locationButton = page.locator(".geo-position");
     this.authForm = new AuthModal(page.locator(".auth-form"));
     this.locationModal = new LocationModal(page, page.locator(".geo-popup"));
+    this.searchButton = page.locator('button:has(svg use[href$="#search-2"])');
+    this.searchInput = page.getByPlaceholder("Поиск в МТ");
+    this.searchResultsChannels = page.locator("#search-popup-channels").locator("a.item");
+    this.searchResultsGeo = page.locator("#search-popup-geo").locator("a.item");
+    this.searchResultsPosts = page.locator("#search-popup-posts").locator("a.item");
   }
 
   async goto() {
