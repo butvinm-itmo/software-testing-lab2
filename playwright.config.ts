@@ -34,10 +34,18 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
+    { name: "setup", testMatch: /setup\.ts/ },
+
     {
       name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
-    }
+      use: {
+        ...devices["Desktop Chrome"],
+        storageState: "playwright/.auth/user.json",
+        geolocation: { longitude: 30.308365794488516, latitude: 59.957135620735784 },
+        permissions: ["geolocation"],
+      },
+      dependencies: ["setup"],
+    },
     /* Test against mobile viewports. */
     // {
     //   name: 'Mobile Chrome',

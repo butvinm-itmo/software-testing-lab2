@@ -10,6 +10,6 @@
   },
   "scripts": {},
   "prettier": {
-    "printWidth": 666
+    "printWidth": 140
   }
 }
