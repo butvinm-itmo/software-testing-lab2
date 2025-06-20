@@ -7,13 +7,12 @@ test.describe("Настройки местоположения", () => {
 
   test.beforeEach(async ({ page }) => {
     homePage = new HomePage(page);
+    await homePage.goto();
   });
 
   // TODO: need to figure out how to make the test robust
   // test("[ST-4] Выбор местоположения на карте", async ({ page }) => {
   //   await homePage.goto();
-  //   await expect(page).toHaveURL(homePage.url);
-
   //   await homePage.locationButton.click();
   //   await expect(homePage.locationModal.root).toBeVisible();
 
@@ -25,9 +24,6 @@ test.describe("Настройки местоположения", () => {
   // });
 
   test("[ST-4] Поиск местоположения по названию", async ({ page }) => {
-    await homePage.goto();
-    await expect(page).toHaveURL(homePage.url);
-
     await homePage.locationButton.click();
     await expect(homePage.locationModal.root).toBeVisible();
 
@@ -47,9 +43,6 @@ test.describe("Настройки местоположения", () => {
   });
 
   test("[ST-4] Автоматическое определение местоположения", async ({ page }) => {
-    await homePage.goto();
-    await expect(page).toHaveURL(homePage.url);
-
     await homePage.locationButton.click();
     await expect(homePage.locationModal.root).toBeVisible();
 
@@ -62,9 +55,6 @@ test.describe("Настройки местоположения", () => {
   });
 
   test("[ST-4] Подписка на местоположение", async ({ page }) => {
-    await homePage.goto();
-    await expect(page).toHaveURL(homePage.url);
-
     await homePage.locationButton.click();
     await expect(homePage.locationModal.root).toBeVisible();
 
@@ -87,9 +77,6 @@ test.describe("Настройки местоположения", () => {
   });
 
   test("[ST-4] Создание ярлыка из текущего местоположения", async ({ page }) => {
-    await homePage.goto();
-    await expect(page).toHaveURL(homePage.url);
-
     await homePage.locationButton.click();
     await expect(homePage.locationModal.root).toBeVisible();
 

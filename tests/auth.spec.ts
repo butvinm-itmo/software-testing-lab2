@@ -9,12 +9,10 @@ test.describe("Авторизация", () => {
 
   test.beforeEach(async ({ page }) => {
     homePage = new HomePage(page);
+    await homePage.goto();
   });
 
   test("[ST-1] Успешная авторизация по электронной почте", async ({ page }) => {
-    await homePage.goto();
-    await expect(page).toHaveURL(homePage.url);
-
     await homePage.loginButton.click();
     await expect(homePage.authForm.root).toBeVisible();
 
@@ -29,9 +27,6 @@ test.describe("Авторизация", () => {
   });
 
   test("[ST-1] Авторизация по электронной почте с неправильным паролем", async ({ page }) => {
-    await homePage.goto();
-    await expect(page).toHaveURL(homePage.url);
-
     await homePage.loginButton.click();
     await expect(homePage.authForm.root).toBeVisible();
 
@@ -46,9 +41,6 @@ test.describe("Авторизация", () => {
   });
 
   test("[ST-1] Авторизация по электронной почте с незарегистрированной почтой", async ({ page }) => {
-    await homePage.goto();
-    await expect(page).toHaveURL(homePage.url);
-
     await homePage.loginButton.click();
     await expect(homePage.authForm.root).toBeVisible();
 
