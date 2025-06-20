@@ -65,6 +65,12 @@ test.describe("Настройки местоположения", () => {
       .click();
     await homePage.locationModal.imaHereButton.click();
     await expect(homePage.locationModal.currentLocationCard.root).toContainText("Метрополь");
+    
+    // if previous test runs did not restore the state
+    if (!await homePage.locationModal.currentLocationCard.subscribeButton.isVisible()) {
+      await homePage.locationModal.currentLocationCard.unsubscribeButton.click();
+    }
+    
     await expect(homePage.locationModal.currentLocationCard.subscribeButton).toBeVisible();
 
     await homePage.locationModal.currentLocationCard.subscribeButton.click();
