@@ -1,5 +1,8 @@
 import { Page, Locator } from "@playwright/test";
 
+import { BlogPost } from "./components/blogPost";
+import { AuthModal } from "./components/authModal";
+
 export class HomePage {
   readonly url = "https://mt.ru/";
   readonly page: Page;
@@ -7,9 +10,8 @@ export class HomePage {
   readonly profileButton: Locator;
   readonly onboardingPopup: Locator;
   readonly locationButton: Locator;
-  readonly authForm: AuthForm;
+  readonly authForm: AuthModal;
   readonly locationModal: LocationModal;
-  readonly blogPost: BlogPost;
 
   constructor(page: Page) {
     this.page = page;
@@ -17,9 +19,8 @@ export class HomePage {
     this.profileButton = page.locator("#sidebar-profile");
     this.onboardingPopup = page.locator(".onboarding-intro-popup");
     this.locationButton = page.locator(".geo-position");
-    this.authForm = new AuthForm(page.locator(".auth-form"));
+    this.authForm = new AuthModal(page.locator(".auth-form"));
     this.locationModal = new LocationModal(page, page.locator(".geo-popup"));
-    this.blogPost = new BlogPost(page.getByRole("article").first());
   }
 
   async goto() {
@@ -32,46 +33,9 @@ export class HomePage {
       await this.onboardingPopup.locator(".popup-close").click();
     }
   }
-}
 
-export class BlogPost {
-  readonly root: Locator;
-  readonly likeButton: Locator;
-  readonly likesCount: Locator;
-  readonly like: Locator;
-
-  constructor(root: Locator) {
-    this.root = root;
-    this.likeButton = root.locator('[data-test^="control-reaction-"]');
-    this.likesCount = this.likeButton.locator("span:not([class])");
-    this.like = root.locator(".post-actions__btn_love");
-  }
-
-  async getLikesCount(): Promise<number> {
-    if (await this.likesCount.isVisible()) {
-      return parseInt((await this.likesCount.innerText())!);
-    }
-    return 0;
-  }
-}
-
-export class AuthForm {
-  readonly root: Locator;
-  readonly authByMailButton: Locator;
-  readonly emailInput: Locator;
-  readonly emailError: Locator;
-  readonly passwordInput: Locator;
-  readonly passwordError: Locator;
-  readonly loginButton: Locator;
-
-  constructor(root: Locator) {
-    this.root = root;
-    this.authByMailButton = root.getByRole("button", { name: "Вход по почте" });
-    this.emailInput = root.getByLabel("Электронная почта");
-    this.emailError = root.locator("#authFormLoginByEmailEmail ~ .auth-form-input-label-error");
-    this.passwordInput = root.getByLabel("Пароль");
-    this.passwordError = root.locator("#authFormLoginByEmailPassword ~ .auth-form-input-label-error");
-    this.loginButton = root.getByRole("button", { name: "Войти" });
+  firstBlogPost(): BlogPost {
+    return new BlogPost(this.page.getByRole("article").first());
   }
 }
 
